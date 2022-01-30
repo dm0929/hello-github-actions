@@ -13,17 +13,12 @@ jobs:
       - uses: ./action-a
         with:
           MY_NAME: "test"
-      - name: Extract tag name
-        run: |
-          event_name='${{github.event_name}}'
-          if [$event_name != 'pull_request']
-          then
-            echo "TAG=latest" >> $GITHUB_ENV
-          else
-            echo "TAG=test" >> $GITHUB_ENV
-          fi
-        id: tag
-        
+      - name: Get tag on push
+        if: github.event_name == 'push'
+        run: echo "TAG=latest" >> $GITHUB_ENV
+      - name: Get tag on pull_request
+        if: github.event_name != 'push'
+        run: echo "TAG=test" >> $GITHUB_ENV
       - name: Print tag name
         run: |
           echo 'The branch name is' $TAG
