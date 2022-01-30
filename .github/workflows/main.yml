@@ -20,5 +20,4 @@ jobs:
         if: github.event_name != 'push'
         run: echo "TAG=test" >> $GITHUB_ENV
       - name: Print tag name
-        run: |
-          echo 'The branch name is' $TAG
+        run: echo 'The tag name is' $TAG
