@@ -16,6 +16,7 @@ jobs:
       - name: Extract tag name
         run: |
           if github.event_name != 'pull_request'
+          then
             echo "TAG=latest" >> $GITHUB_ENV
           else
             echo "TAG=test" >> $GITHUB_ENV
